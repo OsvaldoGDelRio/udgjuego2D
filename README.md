@@ -3,4 +3,5 @@
 
 ## Avance
 
-3.2. Los prefabs
+
+Añadiendo display de vida a John

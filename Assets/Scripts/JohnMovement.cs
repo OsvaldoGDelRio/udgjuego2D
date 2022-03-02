@@ -13,7 +13,7 @@ public class JohnMovement : MonoBehaviour
     private float Horizontal;
     private bool Grounded;
     private float LastShoot;
-    private int Health = 5;
+    public int Health = 5;
 
     private void Start()
     {
@@ -25,6 +25,13 @@ public class JohnMovement : MonoBehaviour
     {
         // Movimiento
         Horizontal = Input.GetAxisRaw("Horizontal");
+        
+        if(Rigidbody2D.position.y < -2f)
+        {
+            Destroy(gameObject);
+        }
+
+        
 
         if (Horizontal < 0.0f) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
         else if (Horizontal > 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
