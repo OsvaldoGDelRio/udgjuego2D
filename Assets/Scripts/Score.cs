@@ -6,9 +6,12 @@ public class Score : MonoBehaviour
     public JohnMovement John;
     public TextMeshProUGUI HealthText;
 
-
     void Update()
     {
-        HealthText.text = John.Health.ToString();
+        if(John != null)
+        {
+            HealthText.text = John.Health.ToString(); 
+        }
+        
     }
 }

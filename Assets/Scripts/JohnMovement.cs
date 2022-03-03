@@ -7,6 +7,7 @@ public class JohnMovement : MonoBehaviour
     public float Speed;
     public float JumpForce;
     public GameObject BulletPrefab;
+    public GameManagment managment;
 
     private Rigidbody2D Rigidbody2D;
     private Animator Animator;
@@ -28,7 +29,7 @@ public class JohnMovement : MonoBehaviour
         
         if(Rigidbody2D.position.y < -2f)
         {
-            Destroy(gameObject);
+            managment.GameEnd();
         }
 
         
@@ -83,6 +84,9 @@ public class JohnMovement : MonoBehaviour
     public void Hit()
     {
         Health -= 1;
-        if (Health == 0) Destroy(gameObject);
+        if (Health == 0)
+        {
+            managment.GameEnd();
+        }
     }
 }

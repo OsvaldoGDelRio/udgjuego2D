@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GruntScript : MonoBehaviour
 {
+    public JohnMovement JohnHealth;
     public Transform John;
     public GameObject BulletPrefab;
 
@@ -37,6 +38,9 @@ public class GruntScript : MonoBehaviour
     public void Hit()
     {
         Health -= 1;
-        if (Health == 0) Destroy(gameObject);
+        if (Health == 0){
+            JohnHealth.Health = JohnHealth.Health + 1;
+            Destroy(gameObject);
+        } 
     }
 }

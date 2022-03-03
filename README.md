@@ -4,4 +4,4 @@
 ## Avance
 
 
-Añadiendo display de vida a John
+Añadiendo Final al nivel y pantalla de completo
