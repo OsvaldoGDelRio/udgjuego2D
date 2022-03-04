@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "422065173006",
+    "firebase_url": "https://udgunityhomework-default-rtdb.firebaseio.com",
+    "project_id": "udgunityhomework",
+    "storage_bucket": "udgunityhomework.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422065173006:android:44ea23bda9b0679747825f",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.TareaUdGUnity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422065173006-ce2mktig0anmjvgpmjpj5ipvkuhmm72g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhjyXFPwQ7QMRSB3iw-3e6l--pJS7UfLo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422065173006-ce2mktig0anmjvgpmjpj5ipvkuhmm72g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

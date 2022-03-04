@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class JohnMovement : MonoBehaviour
 {
+    [HideInInspector]
+    public ControllerType controller;
     public float Speed;
     public float JumpForce;
     public GameObject BulletPrefab;
@@ -24,19 +26,6 @@ public class JohnMovement : MonoBehaviour
 
     private void Update()
     {
-        // Movimiento
-        Horizontal = Input.GetAxisRaw("Horizontal");
-        
-        if(Rigidbody2D.position.y < -2f)
-        {
-            managment.GameEnd();
-        }
-
-        
-
-        if (Horizontal < 0.0f) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-        else if (Horizontal > 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-
         Animator.SetBool("running", Horizontal != 0.0f);
 
         // Detectar Suelo
@@ -48,37 +37,75 @@ public class JohnMovement : MonoBehaviour
         else Grounded = false;
 
         // Salto
-        if (Input.GetKeyDown(KeyCode.W) && Grounded)
+        if (Input.GetKeyDown(KeyCode.W))
         {
             Jump();
         }
 
         // Disparar
-        if (Input.GetKey(KeyCode.Space) && Time.time > LastShoot + 0.25f)
+        if (Input.GetKey(KeyCode.Space))
         {
             Shoot();
-            LastShoot = Time.time;
+        }
+
+        // Si cae pierde la vida
+        if(Rigidbody2D.position.y < -2f)
+        {
+            managment.GameEnd();
         }
     }
 
     private void FixedUpdate()
     {
+        Move();
+    }
+
+    //Mov
+    public void Move()
+    {
+        if(controller == ControllerType.PC)
+        {
+            Horizontal = Input.GetAxisRaw("Horizontal");
+        }     
+
         Rigidbody2D.velocity = new Vector2(Horizontal * Speed, Rigidbody2D.velocity.y);
+
+        Flip();
     }
 
-    private void Jump()
+    public void Flip()
     {
-        Rigidbody2D.AddForce(Vector2.up * JumpForce);
+        if (Horizontal < 0.0f) transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        else if (Horizontal > 0.0f) transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
     }
 
-    private void Shoot()
+    public void Jump()
     {
-        Vector3 direction;
-        if (transform.localScale.x == 1.0f) direction = Vector3.right;
-        else direction = Vector3.left;
+        if (Grounded)
+        {
+            Rigidbody2D.AddForce(Vector2.up * JumpForce);
+        }      
+    }
 
-        GameObject bullet = Instantiate(BulletPrefab, transform.position + direction * 0.1f, Quaternion.identity);
-        bullet.GetComponent<BulletScript>().SetDirection(direction);
+    public void Shoot()
+    {
+        if(Time.time > LastShoot + 0.25f)
+        {
+            Vector3 direction;
+            if (transform.localScale.x == 1.0f) direction = Vector3.right;
+            else direction = Vector3.left;
+
+            GameObject bullet = Instantiate(BulletPrefab, transform.position + direction * 0.1f, Quaternion.identity);
+            bullet.GetComponent<BulletScript>().SetDirection(direction);
+
+            LastShoot = Time.time;
+        }
+        
+    }
+
+    public void HorizontalMovement(int value)
+    {
+        Horizontal = (float) value;
     }
 
     public void Hit()
