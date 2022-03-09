@@ -15,8 +15,11 @@ public class GameManagment : MonoBehaviour
     public float restartDelay = 1f;
     public GameObject completeLevelUI;
     public GameObject mobileControllerUI;
+
+    public GameObject mobileChangeUI;
+    public GameObject pcChangeUI;
+
     public JohnMovement John;
-    public TMP_Dropdown dropdown;
 
     // Update is called once per frame
     void Start()
@@ -44,19 +47,33 @@ public class GameManagment : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void ControllerSetUp()
+    public void ControllerSetUp(int value)
     {
-        if (dropdown.value == 0)
+        if (value == 1)
         {
-            controller = ControllerType.PC;
-            mobileControllerUI.SetActive(false);
+            ActivateMobileControllerUI();
         }
-        if (dropdown.value == 1)
+         if (value == 0)
         {
-            controller = ControllerType.MOBILE;
-            mobileControllerUI.SetActive(true);
+            ActivatePCControllerUI();
         }
+    }
 
+    public void ActivateMobileControllerUI()
+    {
+        controller = ControllerType.MOBILE;
+        mobileControllerUI.SetActive(true);
+        mobileChangeUI.SetActive(false);
+        pcChangeUI.SetActive(true);
+        John.controller = controller;
+    }
+
+    public void ActivatePCControllerUI()
+    {
+        controller = ControllerType.PC;
+        mobileControllerUI.SetActive(false);
+        pcChangeUI.SetActive(false);
+        mobileChangeUI.SetActive(true);
         John.controller = controller;
     }
 }
