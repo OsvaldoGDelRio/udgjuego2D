@@ -76,4 +76,12 @@ public class GameManagment : MonoBehaviour
         mobileChangeUI.SetActive(true);
         John.controller = controller;
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
 }
